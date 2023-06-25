@@ -1,0 +1,153 @@
+{% extends "index.html" %}
+{% block content %}
+    <!-- Tree Structure -->
+    <div class="container text-center">
+        <!-- Level 1 -->
+        <ul class="nav nav-pills center-pills" style="display: inline-block" role="tablist">
+            {% for top_manager in top_managers %}
+            <li class="active" style="line-height: 10px">
+                <a href="#{{ top_manager.slug }}" role="tab" data-toggle="pill">
+                    <h4>{{ top_manager.position }}</h4>
+                    <p>{{ top_manager.surname }} {{ top_manager.name }} <u>{{ top_manager.email }}</u></p>
+                    <p>Date of employment: {{ top_manager.employment_date }}</p>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="tab-content">
+            {% for top_manager in top_managers %}
+            <div role="tabpanel" class="tab-pane active fade in" id="{{ top_manager.slug }}">
+                <!-- Level 2 -->
+                <ul class="nav nav-pills center-pills" style="display: inline-block" role="tablist">
+                    {% for director in directors %}
+                    {% if top_manager.slug == director.head.slug %}
+                    <li style="line-height: 10px">
+                        <a href="#{{ director.slug }}" role="tab" data-toggle="pill">
+                            <h4>{{ director.position }}</h4>
+                            <p>{{ director.surname }} {{ director.name }} <u>{{ director.email }}</u></p>
+                            <p>Date of employment: {{ director.employment_date }}</p>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+                <div class="tab-content">
+                    {% for director in directors %}
+                    {% if top_manager.slug == director.head.slug %}
+                    <div role="tabpanel" class="tab-pane fade" id="{{ director.slug }}">
+
+                        <!-- Level 3 -->
+                        <ul class="nav nav-pills center-pills" style="display: inline-block" role="tablist">
+                            {% for regional_manager in regional_managers %}
+                            {% if director.slug == regional_manager.head.slug %}
+                            <li style="line-height: 10px">
+                                <a href="#{{ regional_manager.slug }}" role="tab" data-toggle="pill">
+                                    <h4>{{ regional_manager.position }}</h4>
+                                    <p>{{ regional_manager.surname }} {{ regional_manager.name }} <u>{{ regional_manager.email }}</u></p>
+                                    <p>Date of employment: {{ regional_manager.employment_date }}</p>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                        <div class="tab-content">
+                            {% for regional_manager in regional_managers %}
+                            {% if director.slug == regional_manager.head.slug %}
+                            <div role="tabpanel" class="tab-pane fade" id="{{ regional_manager.slug }}">
+
+                                <!-- Level 4 -->
+                                <ul class="nav nav-pills center-pills" style="display: inline-block" role="tablist">
+                                    {% for district_manager in district_managers %}
+                                    {% if regional_manager.slug == district_manager.head.slug %}
+                                    <li style="line-height: 10px">
+                                        <a href="#{{ district_manager.slug }}" role="tab" data-toggle="pill">
+                                            <h4>{{ district_manager.position }}</h4>
+                                            <p>{{ district_manager.surname }} {{ district_manager.name }} <u>{{ district_manager.email }}</u></p>
+                                            <p>{{ district_manager.employment_date }}</p>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                                <div class="tab-content">
+                                    {% for district_manager in district_managers %}
+                                    {% if regional_manager.slug == district_manager.head.slug %}
+                                    <div role="tabpanel" class="tab-pane fade" id="{{ district_manager.slug }}">
+
+                                        <!-- Level 5 -->
+                                        <ul class="nav nav-pills center-pills" style="display: inline-block" role="tablist">
+                                            {% for teamlead in teamleads %}
+                                            {% if district_manager.slug == teamlead.head.slug %}
+                                            <li style="line-height: 10px">
+                                                <a href="#{{ teamlead.slug }}" role="tab" data-toggle="pill">
+                                                    <h4>{{ teamlead.position }}</h4>
+                                                    <p>{{ teamlead.surname }} {{ teamlead.name }} <u>{{ teamlead.email }}</u></p>
+                                                    <p>Date of employment: {{ teamlead.employment_date }}</p>
+                                                </a>
+                                            </li>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </ul>
+                                        <div class="tab-content">
+                                            {% for teamlead in teamleads %}
+                                            {% if district_manager.slug == teamlead.head.slug %}
+                                            <div role="tabpanel" class="tab-pane fade" id="{{ teamlead.slug }}">
+
+                                                <!-- Level 6 -->
+                                                <ul class="nav nav-pills center-pills" style="display: inline-block" role="tablist">
+                                                    {% for specialist in specialists %}
+                                                    {% if teamlead.slug == specialist.head.slug %}
+                                                    <li style="line-height: 10px">
+                                                        <a href="#{{ specialist.slug }}" role="tab" data-toggle="pill">
+                                                            <h4>{{ specialist.position }}</h4>
+                                                            <p>{{ specialist.surname }} {{ specialist.name }} <u>{{ specialist.email }}</u></p>
+                                                            <p>Date of employment: {{ specialist.employment_date }}</p>
+                                                        </a>
+                                                    </li>
+                                                    {% endif %}
+                                                    {% endfor %}
+                                                </ul>
+                                                <div class="tab-content">
+                                                    {% for specialist in specialists %}
+                                                    {% if teamlead.slug == specialist.head.slug %}
+                                                    <div role="tabpanel" class="tab-pane fade" id="{{ specialist.slug }}">
+
+                                                        <!-- Level 7 -->
+                                                        <ul class="nav nav-pills center-pills" style="display: inline-block" role="tablist">
+                                                            {% for trainee in trainees %}
+                                                            {% if specialist.slug == trainee.head.slug %}
+                                                            <li style="line-height: 10px">
+                                                                <a href="#{{ trainee.slug }}" role="tab" data-toggle="pill">
+                                                                    <h4>{{ trainee.position }}</h4>
+                                                                    <p>{{ trainee.surname }} {{ trainee.name }} <u>{{ trainee.email }}</u></p>
+                                                                    <p>Date of employment: {{ trainee.employment_date }}</p>
+                                                                </a>
+                                                            </li>
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                    {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
