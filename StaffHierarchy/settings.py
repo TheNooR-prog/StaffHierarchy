@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tree_structure.apps.TreeStructureConfig',
+    'manager.apps.ManagerConfig',
+    'account.apps.AccountConfig',
+    'django_seed',
 ]
 
 MIDDLEWARE = [
