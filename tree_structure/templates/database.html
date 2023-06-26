@@ -1,5 +1,95 @@
 {% extends "index.html" %}
 {% block content %}
     <!-- Database -->
-
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr class="warning">
+                <th>Position</th>
+                <th>Surname</th>
+                <th>Name</th>
+                <th>E-mail</th>
+                <th>Date of employment</th>
+                <th>Supervisor</th>
+            </tr>
+        </thead>
+        <tbody class="table-striped">
+            <!-- Level 1 -->
+            {% for top_manager in top_managers %}
+            <tr>
+                <td>{{ top_manager.position }}</td>
+                <td>{{ top_manager.surname }}</td>
+                <td>{{ top_manager.name }}</td>
+                <td>{{ top_manager.email }}</td>
+                <td>{{ top_manager.employment_date }}</td>
+                <td>None</td>
+            </tr>
+            {% endfor %}
+            <!-- Level 2 -->
+            {% for director in directors %}
+            <tr>
+                <td>{{ director.position }}</td>
+                <td>{{ director.surname }}</td>
+                <td>{{ director.name }}</td>
+                <td>{{ director.email }}</td>
+                <td>{{ director.employment_date }}</td>
+                <td>{{ director.head.position }} {{ director.head.surname }} {{ director.head.name }}</td>
+            </tr>
+            {% endfor %}
+            <!-- Level 3 -->
+            {% for regional_manager in regional_managers %}
+            <tr>
+                <td>{{ regional_manager.position }}</td>
+                <td>{{ regional_manager.surname }}</td>
+                <td>{{ regional_manager.name }}</td>
+                <td>{{ regional_manager.email }}</td>
+                <td>{{ regional_manager.employment_date }}</td>
+                <td>{{ regional_manager.head.position }} {{ regional_manager.head.surname }} {{ regional_manager.head.name }}</td>
+            </tr>
+            {% endfor %}
+            <!-- Level 4 -->
+            {% for district_manager in district_managers %}
+            <tr>
+                <td>{{ district_manager.position }}</td>
+                <td>{{ district_manager.surname }}</td>
+                <td>{{ district_manager.name }}</td>
+                <td>{{ district_manager.email }}</td>
+                <td>{{ district_manager.employment_date }}</td>
+                <td>{{ district_manager.head.position }} {{ district_manager.head.surname }} {{ district_manager.head.name }}</td>
+            </tr>
+            {% endfor %}
+            <!-- Level 5 -->
+            {% for teamlead in teamleads %}
+            <tr>
+                <td>{{ teamlead.position }}</td>
+                <td>{{ teamlead.surname }}</td>
+                <td>{{ teamlead.name }}</td>
+                <td>{{ teamlead.email }}</td>
+                <td>{{ teamlead.employment_date }}</td>
+                <td>{{ teamlead.head.position }} {{ teamlead.head.surname }} {{ teamlead.head.name }}</td>
+            </tr>
+            {% endfor %}
+            <!-- Level 6 -->
+            {% for specialist in specialists %}
+            <tr>
+                <td>{{ specialist.position }}</td>
+                <td>{{ specialist.surname }}</td>
+                <td>{{ specialist.name }}</td>
+                <td>{{ specialist.email }}</td>
+                <td>{{ specialist.employment_date }}</td>
+                <td>{{ specialist.head.position }} {{ specialist.head.surname }} {{ specialist.head.name }}</td>
+            </tr>
+            {% endfor %}
+            <!-- Level 7 -->
+            {% for trainee in trainees %}
+            <tr>
+                <td>{{ trainee.position }}</td>
+                <td>{{ trainee.surname }}</td>
+                <td>{{ trainee.name }}</td>
+                <td>{{ trainee.email }}</td>
+                <td>{{ trainee.employment_date }}</td>
+                <td>{{ trainee.head.position }} {{ trainee.head.surname }} {{ trainee.head.name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
